@@ -4,13 +4,16 @@
 //
 //  Created by Rafael Santos on 04/04/2025.
 //
+import Foundation
+import Combine
 
-class HomeViewModel {
+class HomeViewModel: ObservableObject {
     private let getWelcomeMessageUseCase: GetWelcomeMessageUseCase
-    var message: String = ""
+    @Published var message: String = ""
     
     init(repository: WelcomeRepository = WelcomeRepositoryImpl()) {
         self.getWelcomeMessageUseCase = GetWelcomeMessageUseCase(repository: repository)
+        loadMessage()
     }
     
     func loadMessage() {
