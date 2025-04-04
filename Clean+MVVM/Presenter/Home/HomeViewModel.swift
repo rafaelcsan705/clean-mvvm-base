@@ -13,7 +13,6 @@ class HomeViewModel: ObservableObject {
     
     init(repository: WelcomeRepository = WelcomeRepositoryImpl()) {
         self.getWelcomeMessageUseCase = GetWelcomeMessageUseCase(repository: repository)
-        loadMessage()
     }
     
     func loadMessage() {

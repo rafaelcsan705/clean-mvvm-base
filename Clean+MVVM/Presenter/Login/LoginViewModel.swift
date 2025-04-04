@@ -14,7 +14,6 @@ class LoginViewModel: ObservableObject {
     
     init(repository: LoginRepository = LoginRepositoryImpl()) {
         loginUseCase = GetLoginCredentialsUseCase(repository: repository)
-        validateLogin()
     }
     
     func validateLogin() {

@@ -28,6 +28,9 @@ struct LoginView: View {
             }
         }
         .padding()
+        .onAppear {
+            viewModel.validateLogin()
+        }
     }
 }
 

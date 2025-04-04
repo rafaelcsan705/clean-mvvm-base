@@ -16,5 +16,8 @@ struct HomeView: View {
                 .multilineTextAlignment(.center)
                 .padding()
         }
+        .onAppear {
+            viewModel.loadMessage()
+        }
     }
 }
