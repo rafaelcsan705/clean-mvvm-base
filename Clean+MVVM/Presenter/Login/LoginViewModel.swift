@@ -4,19 +4,22 @@
 //
 //  Created by Rafael Santos on 04/04/2025.
 //
+import Combine
 
-class LoginViewModel {
+class LoginViewModel: ObservableObject {
     let loginUseCase: GetLoginCredentialsUseCase
     
-    var userName: String = "rafaelcsan705"
-    var password: String = "teste123_password"
+    @Published var userName: String = ""
+    @Published var password: String = ""
     
     init(repository: LoginRepository = LoginRepositoryImpl()) {
         loginUseCase = GetLoginCredentialsUseCase(repository: repository)
+        validateLogin()
     }
     
-    func validateLogin() -> Bool {
+    func validateLogin() {
         let credentials = loginUseCase.execute()
-        return credentials.username == userName && credentials.password == password
+        userName = credentials.username
+        password = credentials.password
     }
 }
