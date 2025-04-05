@@ -7,18 +7,20 @@
 import Combine
 
 class LoginViewModel: ObservableObject {
-    let loginUseCase: GetLoginCredentialsUseCase
+    let loginUseCase: LoginUseCase
     
-    @Published var userName: String = ""
+    @Published var email: String = ""
     @Published var password: String = ""
+    var token = ""
     
-    init(repository: LoginRepository = LoginRepositoryImpl()) {
-        loginUseCase = GetLoginCredentialsUseCase(repository: repository)
+    init(loginRepository: LoginRepository = LoginRepositoryImpl()) {
+        loginUseCase = LoginUseCase(repository: loginRepository)
     }
     
-    func validateLogin() {
-        let credentials = loginUseCase.execute()
-        userName = credentials.username
-        password = credentials.password
+    func login() async throws {
+        let credentials = LoginRequest(email: email, password: password)
+        let value = try await loginUseCase.execute(credentials: credentials)
+        token = value.token
+        print("Rafael - Token: \(token)")
     }
 }

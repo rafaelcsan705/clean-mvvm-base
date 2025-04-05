@@ -1,0 +1,28 @@
+{
+  "configurations" : [
+    {
+      "id" : "6AA7ACDB-6090-424A-B2B1-741DD5C96CF3",
+      "name" : "Configuration 1",
+      "options" : {
+        "targetForVariableExpansion" : {
+          "containerPath" : "container:Clean+MVVM.xcodeproj",
+          "identifier" : "88F4D8572DA02381005FDBE7",
+          "name" : "Clean+MVVMTests"
+        }
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Clean+MVVM.xcodeproj",
+        "identifier" : "88F4D8572DA02381005FDBE7",
+        "name" : "Clean+MVVMTests"
+      }
+    }
+  ],
+  "version" : 1
+}

@@ -7,7 +7,8 @@
 @testable import Clean_MVVM
 
 class MockLoginRepository: LoginRepository {
-    func getLoginCredentials() -> LoginCredentials {
-        return LoginCredentials(username: "teste_user", password: "1234")
+    func login(with credentials: LoginRequest) -> LoginResponse {
+        return LoginResponse(token: "MOCK_TOKEN_ON_TESTS")
     }
 }
+

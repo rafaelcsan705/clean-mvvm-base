@@ -12,50 +12,17 @@ import Combine
 final class LoginViewModelTests: XCTestCase {
     private var cancellables = Set<AnyCancellable>()
     
-    func testValidateLogin_shouldUpdateUserNameAndPassword() {
-        let mockRepository = MockLoginRepository()
-        let viewModel = LoginViewModel(repository: mockRepository)
-        
-        viewModel.validateLogin()
-        assert(viewModel.userName == "teste_user")
-        assert(viewModel.password == "1234")
-    }
-    
-    func testUserName_isPublishedCorrectly_afterValidateLogin() {
+    func testValidateLogin_shouldUpdateEmailAndPassword() async throws {
         // Arrange
         let mockRepository = MockLoginRepository()
-        let viewModel = LoginViewModel(repository: mockRepository)
-        let expectation = expectation(description: "Credentials should be updated")
-
-        // Act + Observe
-        viewModel.$userName
-            .dropFirst()
-            .sink { value in
-                assert(value == "teste_user")
-                expectation.fulfill()
-            }
-            .store(in: &cancellables)
+        let viewModel = LoginViewModel(loginRepository: mockRepository)
+        viewModel.email = "eve.holt@reqres.in"
+        viewModel.password = "cityslicka"
         
-        viewModel.validateLogin()
-        wait(for: [expectation], timeout: 1.0)
-    }
-    
-    func testPassword_isPublishedCorrectly_afterValidateLogin() {
-        // Arrange
-        let mockRepository = MockLoginRepository()
-        let viewModel = LoginViewModel(repository: mockRepository)
-        let expectation = expectation(description: "Credentials should be updated")
-
-        // Act + Observe
-        viewModel.$password
-            .dropFirst()
-            .sink { value in
-                assert(value == "1234")
-                expectation.fulfill()
-            }
-            .store(in: &cancellables)
+        // Act
+        try await viewModel.login()
         
-        viewModel.validateLogin()
-        wait(for: [expectation], timeout: 1.0)
+        // Assert
+        assert(viewModel.token == "MOCK_TOKEN_ON_TESTS")
     }
 }

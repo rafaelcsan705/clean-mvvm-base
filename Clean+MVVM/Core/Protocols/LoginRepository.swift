@@ -6,5 +6,5 @@
 //
 
 protocol LoginRepository {
-    func getLoginCredentials() -> LoginCredentials
+    func login(with credentials: LoginRequest) async throws -> LoginResponse
 }

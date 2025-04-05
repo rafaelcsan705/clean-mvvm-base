@@ -9,19 +9,16 @@ import XCTest
 @testable import Clean_MVVM
 
 final class GetLoginCredentialsUseCaseTests: XCTestCase {
-    
-    func testExecute_shouldReturnMockedCredentials() {
+    func testExecute_shouldReturnMockedCredentials() async throws {
         // Arrange
         let repository = MockLoginRepository()
-        let useCase = GetLoginCredentialsUseCase(repository: repository)
+        let useCase = LoginUseCase(repository: repository)
+        let credentials = LoginRequest(email: "teste_user", password: "1234")
         
         // Act
-        let result = useCase.execute()
+        let result = try await useCase.execute(credentials: credentials)
         
         // Assert
-        assert(result.username == "teste_user")
-        assert(result.password == "1234")
+        assert(result.token == "MOCK_TOKEN_ON_TESTS")
     }
 }
-
-

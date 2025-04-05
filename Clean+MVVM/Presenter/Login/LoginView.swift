@@ -12,25 +12,17 @@ struct LoginView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Text("Username:")
+            TextField(text: $viewModel.email) {
+                Text("Email:")
                     .font(.title2)
-                Spacer()
-                Text(viewModel.userName)
-                    .font(.headline)
             }
-            HStack {
+            
+            TextField(text: $viewModel.password) {
                 Text("Password:")
                     .font(.title2)
-                Spacer()
-                Text(viewModel.password)
-                    .font(.headline)
             }
         }
         .padding()
-        .onAppear {
-            viewModel.validateLogin()
-        }
     }
 }
 
